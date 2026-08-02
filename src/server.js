@@ -2,9 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import 'dotenv/config';
+import { connectMongoDB } from './db/connectMongoDB.js';
 
 const app = express();
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
@@ -56,7 +57,7 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
- console.error(err);
+  console.error(err);
 
   const isProd = process.env.NODE_ENV === "production";
 
@@ -65,7 +66,10 @@ app.use((err, req, res, next) => {
       ? "Something went wrong. Please try again later."
       : err.message,
   });
-})
+});
+
+await connectMongoDB();
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
