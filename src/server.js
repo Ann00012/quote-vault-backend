@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { errors } from "celebrate";
 import 'dotenv/config';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import { Quote } from './models/quote.js';
@@ -24,7 +25,7 @@ app.use((req, res, next) => {
 
 app.use(routerQuotes)
 app.use(notFoundHandler);
-
+app.use(errors());
 app.use(errorHandler);
 
 await connectMongoDB();

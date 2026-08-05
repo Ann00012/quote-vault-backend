@@ -45,4 +45,6 @@ const quoteSchema = new Schema(
 
 );
 
+quoteSchema.index({ category: 1, author: 1 });
+
 export const Quote = model('Quote',quoteSchema);
