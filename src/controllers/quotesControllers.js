@@ -43,13 +43,19 @@ export const getQuoteById = async (req, res) => {
 };
 
 export const createQuote = async (req, res) => {
-  const quote = await Quote.create(req.body);
+  const quote = await Quote.create(
+    {
+      ...req.body,
+    userId: req.user._id});
   res.status(201).json(quote)
 };
 
 export const deleteQuote = async (req, res) => {
   const { quoteId } = req.params;
-  const quote = await Quote.findOneAndDelete({ _id: quoteId });
+  const quote = await Quote.findOneAndDelete({
+    _id: studentId,
+    userId: req.user._id
+  });
   if (!quote) {
     throw createHttpError(404, "Quote not found");
   }
@@ -58,7 +64,7 @@ export const deleteQuote = async (req, res) => {
 
 export const updateQuote = async (req, res) => {
   const { quoteId } = req.params;
-  const quote = await Quote.findOneAndUpdate({ _id: quoteId }, req.body, { returnDocument: "after" });
+  const quote = await Quote.findOneAndUpdate( { _id: studentId, userId: req.user._id }, req.body, { returnDocument: "after" });
   if (!quote) {
     throw createHttpError(404, "Quote not found");
   }

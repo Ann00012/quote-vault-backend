@@ -36,7 +36,12 @@ const quoteSchema = new Schema(
       type: Number,
       default: 0
 
-    }
+    },
+     userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
     {
       timestamps: true,
@@ -45,6 +50,6 @@ const quoteSchema = new Schema(
 
 );
 
-quoteSchema.index({ category: 1, author: 1 });
+quoteSchema.index({ userId: 1,category: 1, author: 1 });
 
 export const Quote = model('Quote',quoteSchema);
