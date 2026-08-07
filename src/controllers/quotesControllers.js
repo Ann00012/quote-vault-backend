@@ -71,3 +71,17 @@ export const updateQuote = async (req, res) => {
   res.status(200).json(quote)
 };
 
+export const getRandomQuote = async (req, res, next) => {
+  try {
+    const randomQuotes = await Quote.aggregate([{ $sample: { size: 1 } }]);
+
+    if (!randomQuotes || randomQuotes.length === 0) {
+      return res.status(404).json({ message: "No quotes found" });
+    }
+
+    res.status(200).json(randomQuotes[0]);
+  } catch (error) {
+    next(error);
+  }
+};
+
