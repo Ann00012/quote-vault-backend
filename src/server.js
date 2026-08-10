@@ -10,6 +10,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import routerQuotes from './routes/quotesRoutes.js';
 import authRouter from './routes/authRoutes.js';
 import cookieParser from "cookie-parser";
+import routerUser from './routes/userRoutes.js';
 
 const app = express();
 // const PORT = process.env.PORT ?? 3000;
@@ -28,7 +29,8 @@ app.use((req, res, next) => {
 });
 
 app.use(authRouter);
-app.use(routerQuotes)
+app.use(routerQuotes);
+app.use(routerUser);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
