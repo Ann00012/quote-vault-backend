@@ -3,7 +3,7 @@ import createHttpError from 'http-errors'
 
 export const getQuotes = async (req, res) => {
   const { page = 1, perPage = 10, category,author,search,sortBy = "_id",
-    sortOrder = "asc" } = req.query;
+    sortOrder = "desc" } = req.query;
   const skip = (page - 1) * perPage;
   const quoteQuery = Quote.find();
     if (category) {
