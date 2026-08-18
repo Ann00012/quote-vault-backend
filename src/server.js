@@ -20,7 +20,21 @@ app.use(logger);
 app.use(express.json({
   type: ['application/json', 'application/vnd.api+json'],
 }));
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://quote-vault-frontend-two.vercel.app' 
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
 app.use(cookieParser());
 
 app.use((req, res, next) => {
