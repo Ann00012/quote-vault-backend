@@ -53,7 +53,7 @@ export const createQuote = async (req, res) => {
 export const deleteQuote = async (req, res) => {
   const { quoteId } = req.params;
   const quote = await Quote.findOneAndDelete({
-    _id: studentId,
+    _id: quoteId,
     userId: req.user._id
   });
   if (!quote) {
