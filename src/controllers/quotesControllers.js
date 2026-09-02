@@ -64,7 +64,7 @@ export const deleteQuote = async (req, res) => {
 
 export const updateQuote = async (req, res) => {
   const { quoteId } = req.params;
-  const quote = await Quote.findOneAndUpdate( { _id: studentId, userId: req.user._id }, req.body, { returnDocument: "after" });
+  const quote = await Quote.findOneAndUpdate( { _id: quoteId, userId: req.user._id }, req.body, { returnDocument: "after" });
   if (!quote) {
     throw createHttpError(404, "Quote not found");
   }
