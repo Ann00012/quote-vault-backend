@@ -16,8 +16,8 @@ export const updateQuoteSchema = {
     quoteId: Joi.string().custom(objectIdValidator).required(),
   }),
   [Segments.BODY]: Joi.object({
-    text: Joi.string().min(2).max(100),
-    author: Joi.string().min(1).max(50),
+    text: Joi.string().min(2).max(300),
+    author: Joi.string().min(1).max(100),
     category: Joi.string().valid(    "Inspiration",
     "Humor",
     "Literature",
@@ -104,7 +104,7 @@ export const getQuotesSchema = {
     "Movies",
     "Music"
     ),
-    author: Joi.string().min(2).max(50),
+    author: Joi.string().min(2).max(100),
     search: Joi.string().trim().allow(""),
     sortBy: Joi.string().valid("_id", "author","likesCount"),
     sortOrder: Joi.string().valid("asc", "desc"),
